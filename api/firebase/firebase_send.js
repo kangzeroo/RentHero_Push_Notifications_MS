@@ -1,6 +1,6 @@
 const axios = require('axios')
 const authHeaders = require('./firebase_auth_headers').authHeaders
-const projectID = 'renthero-landlord-ai'
+const projectID = 'dev-landlordai'
 
 exports.sendNotification = function(notification, clientTokenId){
   /*
