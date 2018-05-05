@@ -1,7 +1,5 @@
 const pg = require('pg')
-
-const env = process.env.NODE_ENV || 'production'
-const config = require('../../credentials/config')[env]
+const config = require('../../credentials/'+process.env.NODE_ENV+'/postgres_config')[process.env.NODE_ENV]
 
 // create a config to configure both pooling behavior
 // and client options
