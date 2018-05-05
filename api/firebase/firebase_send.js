@@ -1,6 +1,6 @@
 const axios = require('axios')
 const authHeaders = require('./firebase_auth_headers').authHeaders
-const projectID = 'dev-landlordai'
+const PROJECT_ID = require('../../credentials/'+process.env.NODE_ENV+'/firebase_config').PROJECT_ID
 
 exports.sendNotification = function(notification, clientTokenId){
   /*
@@ -17,14 +17,17 @@ exports.sendNotification = function(notification, clientTokenId){
   }
   console.log('----- MSG')
   console.log(msg)
+  console.log(authHeaders())
   const p = new Promise((res, rej) => {
-    axios.post(`https://fcm.googleapis.com/v1/projects/${projectID}/messages:send`, msg, authHeaders()) // { httpsAgent: agent })
+    axios.post(`https://fcm.googleapis.com/v1/projects/${PROJECT_ID}/messages:send`, msg, authHeaders()) // { httpsAgent: agent })
       .then((data) => {
+        console.log(data)
         // once we have the response, only then do we dispatch an action to Redux
         res(data)
       })
       .catch((err) => {
-        rej(err.response.data.error.details[0])
+        console.log(err.response.data.error.details[1])
+        rej(err.response.data)
       })
   })
   return p
