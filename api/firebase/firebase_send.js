@@ -26,7 +26,10 @@ exports.sendNotification = function(notification, clientTokenId){
         res(data)
       })
       .catch((err) => {
+        console.log(err.response.data)
+        console.log(err.response.data.error.details[0])
         console.log(err.response.data.error.details[1])
+        console.log('----- x -----')
         rej(err.response.data)
       })
   })
