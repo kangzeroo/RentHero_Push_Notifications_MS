@@ -42,24 +42,14 @@ exports.getFirebaseClientIDFromSessionId = (session_id) => {
 
     const get_relationship = `SELECT * FROM firebase_device_relationship WHERE session_id = $1`
 
-    const return_rows = (rows) => {
-      return rows[0]
-    }
-    return query(get_relationship, values)
-      .then((data) => {
-        return stringify_rows(data)
-      })
-      .then((data) => {
-        return json_rows(data)
-      })
-      .then((data) => {
-        res(data)
-        return return_rows(data)
-      })
-      .catch((error) => {
-        console.log(error)
-        rej()
-      })
+    query(get_relationship, values, (err, results) => {
+      if (err) {
+        console.log(err)
+        rej(err)
+      }
+      console.log(results.rows)
+      res(results.rows)
+    })
   })
   return p
 }
