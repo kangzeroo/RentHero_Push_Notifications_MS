@@ -17,9 +17,13 @@ exports.sendNotification = function(notification, clientTokenId){
   }
   console.log('----- MSG')
   console.log(msg)
-  console.log(authHeaders())
   const p = new Promise((res, rej) => {
-    axios.post(`https://fcm.googleapis.com/v1/projects/${PROJECT_ID}/messages:send`, msg, authHeaders()) // { httpsAgent: agent })
+    console.log('Getting headers...')
+    authHeaders()
+      .then((headers) => {
+        console.log(headers)
+        return axios.post(`https://fcm.googleapis.com/v1/projects/${PROJECT_ID}/messages:send`, msg, headers) // { httpsAgent: agent })
+      })
       .then((data) => {
         console.log(data)
         // once we have the response, only then do we dispatch an action to Redux
