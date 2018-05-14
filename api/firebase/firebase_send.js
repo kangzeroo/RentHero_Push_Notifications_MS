@@ -25,7 +25,7 @@ exports.sendNotification = function(notification, clientTokenId){
         return axios.post(`https://fcm.googleapis.com/v1/projects/${PROJECT_ID}/messages:send`, msg, headers) // { httpsAgent: agent })
       })
       .then((data) => {
-        console.log(data)
+        console.log(data.data)
         // once we have the response, only then do we dispatch an action to Redux
         res(data)
       })

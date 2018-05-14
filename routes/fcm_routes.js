@@ -8,9 +8,9 @@ const saveFirebaseClientIDAndSessionRelationship = require('./Postgres/Queries/F
 exports.send_notification = function(req, res, next){
   const notification = req.body.notification
   const session_id = req.body.session_id
-  // console.log(req.body)
+  console.log(req.body)
   getFirebaseClientIDFromSessionId(session_id).then((data) => {
-    // console.log(data)
+    console.log(data)
     return sendNotification(notification, data[0].firebase_client_id)
   }).then((data) => {
     // console.log(data.data)
@@ -32,6 +32,7 @@ exports.send_notification = function(req, res, next){
 exports.save_firebase_client = function(req, res, next){
   const firebase_client_id = req.body.firebase_client_id
   const session_id = req.body.session_id
+  console.log(req.body)
   saveFirebaseClientIDAndSessionRelationship(session_id, firebase_client_id).then((data) => {
     res.json(data)
   }).catch((err) => {
