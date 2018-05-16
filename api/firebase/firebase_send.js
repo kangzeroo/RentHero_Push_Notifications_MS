@@ -2,17 +2,18 @@ const axios = require('axios')
 const authHeaders = require('./firebase_auth_headers').authHeaders
 const PROJECT_ID = require('../../credentials/'+process.env.NODE_ENV+'/firebase_config').PROJECT_ID
 
-exports.sendNotification = function(notification, clientTokenId){
+exports.sendNotification = function(notification, payload, clientTokenId){
   /*
     notification = {
       "body" : "This is an FCM notification message!",
       "title" : "FCM Message",
     }
   */
+  console.log(payload)
   const msg = {
     "message": {
       "token" : clientTokenId,
-      "notification" : notification
+      "notification" : notification,
     }
   }
   console.log('----- MSG')
