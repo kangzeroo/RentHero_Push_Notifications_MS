@@ -12,8 +12,9 @@ exports.sendNotification = function(notification, payload, clientTokenId){
   console.log(payload)
   const msg = {
     "message": {
-      "token" : clientTokenId,
-      "notification" : notification,
+      "token": clientTokenId,
+      "notification": notification,
+      "data": payload
     }
   }
   console.log('----- MSG')
